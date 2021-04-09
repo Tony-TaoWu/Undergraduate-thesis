@@ -1,4 +1,3 @@
-setwd('C:\\Users\\lenovo\\Desktop\\毕业论文')
 #data <- read.csv("./data/graduate-admissions/Admission_Predict.csv",
 #                 header = T)
 data0 <- read.csv("./data/graduate-admissions/Admission_Predict_Ver1.1.csv",
