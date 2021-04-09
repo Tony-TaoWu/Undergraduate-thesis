@@ -1,9 +1,9 @@
-libname MCMC "C:\Users\lenovo\Desktop\±ÏÒµÂÛÎÄ\data";
+libname MCMC "C:\Users\lenovo\Desktop";
 /* import data */
 proc import out = MCMC.data
-/*Datafile = "C:\Users\lenovo\Desktop\±ÏÒµÂÛÎÄ\data\graduate-admissions\MCMC_data.xls" dbms = excel*/
-/*Datafile = "C:\Users\lenovo\Desktop\±ÏÒµÂÛÎÄ\data\graduate-admissions\MCMC_data2.xls" dbms = excel*/
-Datafile = "C:\Users\lenovo\Desktop\±ÏÒµÂÛÎÄ\data\graduate-admissions\MCMC_data5.xls" dbms = excel
+/*Datafile = "C:\Users\lenovo\Desktop" dbms = excel*/
+/*Datafile = "C:\Users\lenovo\Desktop" dbms = excel*/
+Datafile = "C:\Users\lenovo\Desktop" dbms = excel
 replace;
 Getnames = YES;
 run;quit;
@@ -24,13 +24,13 @@ proc contents varnum data = MCMC.data;
     ods select position;
 run;quit;
 /* ods word */
-ods rtf file = "C:\Users\lenovo\Desktop\±ÏÒµÂÛÎÄ\MCMC.doc";
+ods rtf file = "C:\Users\lenovo\Desktop";
 ods graphics on;
 /* MCMC */
-	/* NBI ÊÇ¼ÆËã²ÎÊı½á¹ûÊ±È¥µô¿ªÍ·µÄµü´úÊı PLOTSÊÇ»­³öËùÓĞÍ¼Ïñ */
-    /* STATISTICSÊÇ¼ÆËã²ÎÊıËùÓĞÍ³¼ÆÁ¿Öµ SEEDÊÇËæ»úÖÖ×Ó NMC ÊÇµü´ú´ÎÊı*/
+	/* NBI æ˜¯è®¡ç®—å‚æ•°ç»“æœæ—¶å»æ‰å¼€å¤´çš„è¿­ä»£æ•° PLOTSæ˜¯ç”»å‡ºæ‰€æœ‰å›¾åƒ */
+    /* STATISTICSæ˜¯è®¡ç®—å‚æ•°æ‰€æœ‰ç»Ÿè®¡é‡å€¼ SEEDæ˜¯éšæœºç§å­ NMC æ˜¯è¿­ä»£æ¬¡æ•°*/
 	/*ods select PostSumInt ess;*/
-	/* Ä£ĞÍ logit(p)=beta0 + beta1x1 +...+ beta10x10 */
+	/* æ¨¡å‹ logit(p)=beta0 + beta1x1 +...+ beta10x10 */
     /* beta0 1 beta1 1 beta2 1 beta3 1 beta4 1 beta5 1 beta6 1 beta7 1 beta8 1 beta9 1 beat10 1*/
 	/* mu = beta0 + beta1*GRE + beta2*TOEFL + beta3*UR2 + beta4*UR3 + beta5*UR4 + beta6*UR5 + beta7*SOP +
                  beta8*LOR + beta9*CGPA + beta10*RE; */
@@ -46,7 +46,7 @@ proc MCMC data = MCMC.data  nbi = 40000 nmc = 100000 seed = 2020 DIAG = ALL DIC
 run;quit;
 ods graphics off;
 
-/*                  ÕıÎÄµ½´Ë½áÊø ÏÂÃæÎª²âÊÔ´úÂë                  */
+/*                  æ­£æ–‡åˆ°æ­¤ç»“æŸ ä¸‹é¢ä¸ºæµ‹è¯•ä»£ç                   */
 
 ods graphics on;
 /* MCMC */
@@ -68,7 +68,7 @@ ods graphics off;
 
 
 
-/* Àı×Ó */
+/* ä¾‹å­ */
 title 'Implement a New Sampling Algorithm';
 data inputdata;
    input remiss cell smear infil li blast temp;
@@ -115,7 +115,7 @@ proc mcmc data=inputdata nmc=100000 propcov=quanew seed=17
    p = cdf('normal', mu, 0, 1);
    model remiss ~ bern(p);
 run;
-/* Àı×Ó½áÊø */
+/* ä¾‹å­ç»“æŸ */
 
 
 proc fcmp outlib=sasuser.funcs.uds;
@@ -236,7 +236,7 @@ proc mcmc data=inputdata nmc=5000 monitor=(beta) outpost=hhout;
          call mult(S,Z,B);
       end;
    endcnst;
-   /* ÓÃudsÌí¼Ó³éÑùº¯Êı */
+   /* ç”¨udsæ·»åŠ æŠ½æ ·å‡½æ•° */
    uds HH(beta,Z,B,x,y,W,sQ,S,L);
    parms z: beta: 0 B1-B7 / uds;
    prior z: beta: B1-B7 ~ general(0);
