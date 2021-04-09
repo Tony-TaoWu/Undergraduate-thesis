@@ -1,6 +1,6 @@
 ---
 title: "INLA-example"
-author: "Wu Wentao"
+author: 
 date: "2020/2/21"
 output: html_document
 ---
